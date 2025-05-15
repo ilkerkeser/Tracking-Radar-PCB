@@ -1,0 +1,805 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD24\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">15.05.2025</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">16:12:36</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc" class="file"><acronym title="C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc">C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">134</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Waived Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">2</td></tr>
+</table>
+</td>
+</table><a name="ID40K3YAF4SJE5HN13WQ0MXXPQ5KBAZRGTFHZG3YOXQ5LPFKHQE4GB"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDUMI52UMMEZJSKT0LD4WHJVNO5MI0DK5QNVOUTNNUN3II2OKUM5SB">Clearance Constraint (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID451CIPENPMY2OV0SLO4EARFOHJX1OEH1DHNACRNQFPLHWE50JBLE">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID1U4ZZ0K5KNMQDAAZF4D5I2YAREM33LN5TVTXQR4I3WUFVYJ4BHI">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">6</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID2U0DESO5TZGCNMREPFGZKMNB5DMDSANT0Z1EBB1E1NQHPEE4CAH">Modified Polygon (Allow modified: Yes), (Allow shelved: Yes)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDNPUNNGAN0VSQBIHHLQH3JUFHMBFOONZVLH04GJLPIFVCTF12Y3GF">Width Constraint (Min=0.102mm) (Max=2.54mm) (Preferred=0.254mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDIVL4IXU2134Z05KFXYRPAZVWI5VX0RUZYX0I2EMBTBSCTJNDZGD">Routing Topology Rule(Topology=Shortest) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZQQKRTJSBGI3G5MZAMADCSBNYJRUSBBNNEYZAWMKSGLPYTVXGEEH">SMD To Corner (Distance=0.051mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDYUSQXLJW0I4TNEEHM5XCPCGLGDEHXZGVTJJN3ZE4UNPEJMGLHO">SMD Entry (Side = Allowed) (Corner = Allowed) (Any Angle = Allowed) (Ignore First Corner = Allowed)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDXBNLWMNIW1Z1GOUTDKM5G0ETXDBKJ2MITBVBBGFIFTDTUVILWKWE">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">2</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDFAHINLYNIZBPDCLMILAMFA0YRLBGFZ420RVAV5MVTBDOMELQUSWC">Minimum Annular Ring (Minimum=0.1mm) (All)</a></td>
+<td class="column2">34</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDJS4HDK2PG0D1JPYKIYLINM5ILFJWFTHSNTITUVP41FKBAZFHPFSG">Hole Size Constraint (Min=0.15mm) (Max=6.3mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDXABZF1AZFBNOBIZMX5VUSHFB5DZKPNA0MK3QVQJM10UITX252BAJ">Hole To Hole Clearance (Gap=0.2mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDXP53ZMAZRDOOPLFSMUXG443C2EA0QQM2LKDJWPL5APXFO5RTQ11F">Minimum Solder Mask Sliver (Gap=0.1mm) (All),(All)</a></td>
+<td class="column2">56</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQZLLGLIVR5SEE43WS3AQOUPS3E2W2Q1XXTLHVCOMMPJMAB4DH5FH">Silk To Solder Mask (Clearance=0.1mm) (IsPad),(All)</a></td>
+<td class="column2">22</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDOMNYG0RBAHXPC4JOQ0BAYBN2KNFYVYPSEXHZ2DM3TTVHJFDL4YGJ">Silk to Silk (Clearance=0.15mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDT1ZRQGZRGMHUNPY4BDR5NAEMKQ51HLLZG5RZI4FXLZHFEI5T1M">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDYNU1M3XF0HAHBP1VJOL3DV31YMXI3E13DDIY10FM40TR5PJ3CWJF">Board Clearance Constraint (Gap=0mm) (All)</a></td>
+<td class="column2">14</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDOLUMRLAIY2MAO5ZJGTS2HD4JLJOCVUE2MX1RURMJ3IIZCYPCUU4M">Height Constraint (Min=0mm) (Max=100mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">134</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Waived Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDITTXCTM032IQJ2QJQ2LKF0RWYJKQ501KM5BP14HOT40UETKD4OVL">Minimum Solder Mask Sliver (Gap=0.1mm) (All),(All)</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDMVSCKUSS2TZBLWFNUCYX42G4OC2R2QGQ1PA1V5NUQIYGAZP30AKB">Board Clearance Constraint (Gap=0mm) (All)</a></td>
+<td class="column2">1</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">2</td>
+</tr>
+</table><br><a name="ID32KBQ5ZBPGPDKVNHTBZHGMSYJ4CTUDB0K5CEXJRVJBRE52SFYLC"><h2>Rule Violations</h2></a><a name="ID1U4ZZ0K5KNMQDAAZF4D5I2YAREM33LN5TVTXQR4I3WUFVYJ4BHI"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1397.159mil|Location2.X=1419.771mil|Location1.Y=1964.875mil|Location2.Y=1987.487mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1397.159mil|Location2.X=1419.771mil|Location1.Y=1964.875mil|Location2.Y=1987.487mil|Absolute=True">Isolated copper: Split Plane  (GND) on Inner 1(GND). Copper island connected to pads/vias detected. Copper area is : 0.253 sq. mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1397.159mil|Location2.X=1419.771mil|Location1.Y=2008.182mil|Location2.Y=2030.794mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1397.159mil|Location2.X=1419.771mil|Location1.Y=2008.182mil|Location2.Y=2030.794mil|Absolute=True">Isolated copper: Split Plane  (GND) on Inner 1(GND). Copper island connected to pads/vias detected. Copper area is : 0.253 sq. mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1422.909mil|Location2.X=1437.328mil|Location1.Y=2033.932mil|Location2.Y=2048.351mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1422.909mil|Location2.X=1437.328mil|Location1.Y=2033.932mil|Location2.Y=2048.351mil|Absolute=True">Isolated copper: Split Plane  (GND) on Inner 1(GND). Dead copper detected. Copper area is : 0.067 sq. mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1422.909mil|Location2.X=1437.328mil|Location1.Y=1947.318mil|Location2.Y=1961.737mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1422.909mil|Location2.X=1437.328mil|Location1.Y=1947.318mil|Location2.Y=1961.737mil|Absolute=True">Isolated copper: Split Plane  (GND) on Inner 1(GND). Dead copper detected. Copper area is : 0.067 sq. mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1379.601mil|Location2.X=1394.021mil|Location1.Y=1947.318mil|Location2.Y=1961.737mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1379.601mil|Location2.X=1394.021mil|Location1.Y=1947.318mil|Location2.Y=1961.737mil|Absolute=True">Isolated copper: Split Plane  (GND) on Inner 1(GND). Dead copper detected. Copper area is : 0.067 sq. mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1379.601mil|Location2.X=1394.021mil|Location1.Y=2033.932mil|Location2.Y=2048.351mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1379.601mil|Location2.X=1394.021mil|Location1.Y=2033.932mil|Location2.Y=2048.351mil|Absolute=True">Isolated copper: Split Plane  (GND) on Inner 1(GND). Dead copper detected. Copper area is : 0.067 sq. mm</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDXBNLWMNIW1Z1GOUTDKM5G0ETXDBKJ2MITBVBBGFIFTDTUVILWKWE"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1374.528mil|Location2.X=1442.402mil|Location1.Y=1942.244mil|Location2.Y=2010.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1374.528mil|Location2.X=1442.402mil|Location1.Y=1942.244mil|Location2.Y=2010.118mil|Absolute=True">Starved Thermal on Inner 1(GND): Via (10.375mm,24.795mm) from Top Layer to Bottom Layer. Only 41% copper is connected to the hole.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1374.528mil|Location2.X=1442.402mil|Location1.Y=1985.551mil|Location2.Y=2053.425mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1374.528mil|Location2.X=1442.402mil|Location1.Y=1985.551mil|Location2.Y=2053.425mil|Absolute=True">Starved Thermal on Inner 1(GND): Via (10.375mm,25.895mm) from Top Layer to Bottom Layer. Only 40% copper is connected to the hole.</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDFAHINLYNIZBPDCLMILAMFA0YRLBGFZ420RVAV5MVTBDOMELQUSWC"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Annular Ring (Minimum=0.1mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1483.627mil|Location2.X=1488.814mil|Location1.Y=2582.052mil|Location2.Y=2587.239mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1483.627mil|Location2.X=1488.814mil|Location1.Y=2582.052mil|Location2.Y=2587.239mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U1-10(12.35mm,40.125mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1432.446mil|Location2.X=1437.633mil|Location1.Y=2582.052mil|Location2.Y=2587.239mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1432.446mil|Location2.X=1437.633mil|Location1.Y=2582.052mil|Location2.Y=2587.239mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U1-11(11.05mm,40.125mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1483.627mil|Location2.X=1488.814mil|Location1.Y=2633.233mil|Location2.Y=2638.421mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1483.627mil|Location2.X=1488.814mil|Location1.Y=2633.233mil|Location2.Y=2638.421mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U1-12(12.35mm,41.425mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1432.446mil|Location2.X=1437.633mil|Location1.Y=2633.233mil|Location2.Y=2638.421mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1432.446mil|Location2.X=1437.633mil|Location1.Y=2633.233mil|Location2.Y=2638.421mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U1-13(11.05mm,41.425mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1483.627mil|Location2.X=1488.814mil|Location1.Y=2684.415mil|Location2.Y=2689.602mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1483.627mil|Location2.X=1488.814mil|Location1.Y=2684.415mil|Location2.Y=2689.602mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U1-14(12.35mm,42.725mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1432.446mil|Location2.X=1437.633mil|Location1.Y=2684.415mil|Location2.Y=2689.602mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1432.446mil|Location2.X=1437.633mil|Location1.Y=2684.415mil|Location2.Y=2689.602mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U1-15(11.05mm,42.725mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1483.627mil|Location2.X=1488.814mil|Location1.Y=2735.596mil|Location2.Y=2740.783mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1483.627mil|Location2.X=1488.814mil|Location1.Y=2735.596mil|Location2.Y=2740.783mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U1-16(12.35mm,44.025mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1432.446mil|Location2.X=1437.633mil|Location1.Y=2735.596mil|Location2.Y=2740.783mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1432.446mil|Location2.X=1437.633mil|Location1.Y=2735.596mil|Location2.Y=2740.783mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U1-17(11.05mm,44.025mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1502.328mil|Location2.X=1507.515mil|Location1.Y=3131.265mil|Location2.Y=3136.452mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1502.328mil|Location2.X=1507.515mil|Location1.Y=3131.265mil|Location2.Y=3136.452mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U2-10(12.825mm,54.075mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1451.147mil|Location2.X=1456.333mil|Location1.Y=3131.265mil|Location2.Y=3136.452mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1451.147mil|Location2.X=1456.333mil|Location1.Y=3131.265mil|Location2.Y=3136.452mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U2-11(11.525mm,54.075mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1502.328mil|Location2.X=1507.515mil|Location1.Y=3182.446mil|Location2.Y=3187.633mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1502.328mil|Location2.X=1507.515mil|Location1.Y=3182.446mil|Location2.Y=3187.633mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U2-12(12.825mm,55.375mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1451.147mil|Location2.X=1456.333mil|Location1.Y=3182.446mil|Location2.Y=3187.633mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1451.147mil|Location2.X=1456.333mil|Location1.Y=3182.446mil|Location2.Y=3187.633mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U2-13(11.525mm,55.375mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1502.328mil|Location2.X=1507.515mil|Location1.Y=3233.627mil|Location2.Y=3238.814mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1502.328mil|Location2.X=1507.515mil|Location1.Y=3233.627mil|Location2.Y=3238.814mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U2-14(12.825mm,56.675mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1451.147mil|Location2.X=1456.333mil|Location1.Y=3233.627mil|Location2.Y=3238.814mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1451.147mil|Location2.X=1456.333mil|Location1.Y=3233.627mil|Location2.Y=3238.814mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U2-15(11.525mm,56.675mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1502.328mil|Location2.X=1507.515mil|Location1.Y=3284.808mil|Location2.Y=3289.995mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1502.328mil|Location2.X=1507.515mil|Location1.Y=3284.808mil|Location2.Y=3289.995mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U2-16(12.825mm,57.975mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1451.147mil|Location2.X=1456.333mil|Location1.Y=3284.808mil|Location2.Y=3289.995mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1451.147mil|Location2.X=1456.333mil|Location1.Y=3284.808mil|Location2.Y=3289.995mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U2-17(11.525mm,57.975mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1527.918mil|Location2.X=1533.105mil|Location1.Y=3624.375mil|Location2.Y=3629.562mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1527.918mil|Location2.X=1533.105mil|Location1.Y=3624.375mil|Location2.Y=3629.562mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U3-10(13.475mm,66.6mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1527.918mil|Location2.X=1533.105mil|Location1.Y=3675.556mil|Location2.Y=3680.743mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1527.918mil|Location2.X=1533.105mil|Location1.Y=3675.556mil|Location2.Y=3680.743mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U3-11(13.475mm,67.9mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1579.099mil|Location2.X=1584.286mil|Location1.Y=3624.375mil|Location2.Y=3629.562mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1579.099mil|Location2.X=1584.286mil|Location1.Y=3624.375mil|Location2.Y=3629.562mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U3-12(14.775mm,66.6mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1579.099mil|Location2.X=1584.286mil|Location1.Y=3675.556mil|Location2.Y=3680.743mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1579.099mil|Location2.X=1584.286mil|Location1.Y=3675.556mil|Location2.Y=3680.743mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U3-13(14.775mm,67.9mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1630.281mil|Location2.X=1635.467mil|Location1.Y=3624.375mil|Location2.Y=3629.562mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1630.281mil|Location2.X=1635.467mil|Location1.Y=3624.375mil|Location2.Y=3629.562mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U3-14(16.075mm,66.6mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1630.281mil|Location2.X=1635.467mil|Location1.Y=3675.556mil|Location2.Y=3680.743mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1630.281mil|Location2.X=1635.467mil|Location1.Y=3675.556mil|Location2.Y=3680.743mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U3-15(16.075mm,67.9mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1681.462mil|Location2.X=1686.649mil|Location1.Y=3624.375mil|Location2.Y=3629.562mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1681.462mil|Location2.X=1686.649mil|Location1.Y=3624.375mil|Location2.Y=3629.562mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U3-16(17.375mm,66.6mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1681.462mil|Location2.X=1686.649mil|Location1.Y=3675.556mil|Location2.Y=3680.743mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1681.462mil|Location2.X=1686.649mil|Location1.Y=3675.556mil|Location2.Y=3680.743mil|Absolute=True">Minimum Annular Ring: (0.05mm &lt; 0.1mm) Pad U3-17(17.375mm,67.9mm) on Multi-Layer (Annular Ring=0.05mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1393.076mil|Location2.X=1398.263mil|Location1.Y=2190.812mil|Location2.Y=2195.999mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1393.076mil|Location2.X=1398.263mil|Location1.Y=2190.812mil|Location2.Y=2195.999mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.1mm) Via (10.05mm,30.15mm) from Top Layer to Bottom Layer (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1394.06mil|Location2.X=1399.247mil|Location1.Y=2239.04mil|Location2.Y=2244.227mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1394.06mil|Location2.X=1399.247mil|Location1.Y=2239.04mil|Location2.Y=2244.227mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.1mm) Via (10.075mm,31.375mm) from Top Layer to Bottom Layer (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1396.028mil|Location2.X=1401.216mil|Location1.Y=2286.284mil|Location2.Y=2291.471mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1396.028mil|Location2.X=1401.216mil|Location1.Y=2286.284mil|Location2.Y=2291.471mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.1mm) Via (10.125mm,32.575mm) from Top Layer to Bottom Layer (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1447.21mil|Location2.X=1452.397mil|Location1.Y=2190.812mil|Location2.Y=2195.999mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1447.21mil|Location2.X=1452.397mil|Location1.Y=2190.812mil|Location2.Y=2195.999mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.1mm) Via (11.425mm,30.15mm) from Top Layer to Bottom Layer (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1447.21mil|Location2.X=1452.397mil|Location1.Y=2239.04mil|Location2.Y=2244.227mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1447.21mil|Location2.X=1452.397mil|Location1.Y=2239.04mil|Location2.Y=2244.227mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.1mm) Via (11.425mm,31.375mm) from Top Layer to Bottom Layer (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1448.194mil|Location2.X=1453.381mil|Location1.Y=2287.269mil|Location2.Y=2292.456mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1448.194mil|Location2.X=1453.381mil|Location1.Y=2287.269mil|Location2.Y=2292.456mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.1mm) Via (11.45mm,32.6mm) from Top Layer to Bottom Layer (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1561.383mil|Location2.X=1566.57mil|Location1.Y=1637.662mil|Location2.Y=1642.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1561.383mil|Location2.X=1566.57mil|Location1.Y=1637.662mil|Location2.Y=1642.849mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.1mm) Via (14.325mm,16.1mm) from Top Layer to Bottom Layer (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1590.91mil|Location2.X=1596.097mil|Location1.Y=3827.623mil|Location2.Y=3832.81mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1590.91mil|Location2.X=1596.097mil|Location1.Y=3827.623mil|Location2.Y=3832.81mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.1mm) Via (15.075mm,71.725mm) from Top Layer to Bottom Layer (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2966.895mil|Location2.X=2972.082mil|Location1.Y=1989.04mil|Location2.Y=1994.227mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2966.895mil|Location2.X=2972.082mil|Location1.Y=1989.04mil|Location2.Y=1994.227mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.1mm) Via (50.025mm,25.025mm) from Top Layer to Bottom Layer (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3011.025mil|Location2.X=3016.212mil|Location1.Y=1983.958mil|Location2.Y=1989.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3011.025mil|Location2.X=3016.212mil|Location1.Y=1983.958mil|Location2.Y=1989.145mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.1mm) Via (51.146mm,24.896mm) from Top Layer to Bottom Layer (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDXP53ZMAZRDOOPLFSMUXG443C2EA0QQM2LKDJWPL5APXFO5RTQ11F"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.1mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3089.926mil|Location2.X=3095.113mil|Location1.Y=1309.414mil|Location2.Y=1314.601mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3089.926mil|Location2.X=3095.113mil|Location1.Y=1309.414mil|Location2.Y=1314.601mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.074mm &lt; 0.1mm) Between Pad J5-S(54.225mm,7.855mm) on Top Layer And Via (52.775mm,7.925mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.074mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1483.627mil|Location2.X=1488.814mil|Location1.Y=2585.753mil|Location2.Y=2590.94mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1483.627mil|Location2.X=1488.814mil|Location1.Y=2585.753mil|Location2.Y=2590.94mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.062mm &lt; 0.1mm) Between Pad U1-10(12.35mm,40.125mm) on Multi-Layer And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [0.062mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1432.446mil|Location2.X=1437.633mil|Location1.Y=2585.753mil|Location2.Y=2590.94mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1432.446mil|Location2.X=1437.633mil|Location1.Y=2585.753mil|Location2.Y=2590.94mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.062mm &lt; 0.1mm) Between Pad U1-11(11.05mm,40.125mm) on Multi-Layer And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [0.062mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1483.627mil|Location2.X=1488.814mil|Location1.Y=2722.052mil|Location2.Y=2727.24mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1483.627mil|Location2.X=1488.814mil|Location1.Y=2722.052mil|Location2.Y=2727.24mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.062mm &lt; 0.1mm) Between Pad U1-16(12.35mm,44.025mm) on Multi-Layer And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [0.062mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1432.446mil|Location2.X=1437.633mil|Location1.Y=2722.052mil|Location2.Y=2727.24mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1432.446mil|Location2.X=1437.633mil|Location1.Y=2722.052mil|Location2.Y=2727.24mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.062mm &lt; 0.1mm) Between Pad U1-17(11.05mm,44.025mm) on Multi-Layer And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [0.062mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1502.328mil|Location2.X=1507.515mil|Location1.Y=3134.966mil|Location2.Y=3140.153mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1502.328mil|Location2.X=1507.515mil|Location1.Y=3134.966mil|Location2.Y=3140.153mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.062mm &lt; 0.1mm) Between Pad U2-10(12.825mm,54.075mm) on Multi-Layer And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [0.062mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1451.147mil|Location2.X=1456.333mil|Location1.Y=3134.966mil|Location2.Y=3140.153mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1451.147mil|Location2.X=1456.333mil|Location1.Y=3134.966mil|Location2.Y=3140.153mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.062mm &lt; 0.1mm) Between Pad U2-11(11.525mm,54.075mm) on Multi-Layer And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [0.062mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1502.328mil|Location2.X=1507.515mil|Location1.Y=3271.265mil|Location2.Y=3276.452mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1502.328mil|Location2.X=1507.515mil|Location1.Y=3271.265mil|Location2.Y=3276.452mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.062mm &lt; 0.1mm) Between Pad U2-16(12.825mm,57.975mm) on Multi-Layer And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [0.062mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1451.147mil|Location2.X=1456.333mil|Location1.Y=3271.265mil|Location2.Y=3276.452mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1451.147mil|Location2.X=1456.333mil|Location1.Y=3271.265mil|Location2.Y=3276.452mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.062mm &lt; 0.1mm) Between Pad U2-17(11.525mm,57.975mm) on Multi-Layer And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [0.062mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1536.54mil|Location2.X=1541.727mil|Location1.Y=3619.454mil|Location2.Y=3624.641mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1536.54mil|Location2.X=1541.727mil|Location1.Y=3619.454mil|Location2.Y=3624.641mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.062mm &lt; 0.1mm) Between Pad U3-10(13.475mm,66.6mm) on Multi-Layer And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [0.062mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1536.54mil|Location2.X=1541.727mil|Location1.Y=3670.635mil|Location2.Y=3675.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1536.54mil|Location2.X=1541.727mil|Location1.Y=3670.635mil|Location2.Y=3675.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.062mm &lt; 0.1mm) Between Pad U3-11(13.475mm,67.9mm) on Multi-Layer And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [0.062mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1672.84mil|Location2.X=1678.026mil|Location1.Y=3619.454mil|Location2.Y=3624.641mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1672.84mil|Location2.X=1678.026mil|Location1.Y=3619.454mil|Location2.Y=3624.641mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.062mm &lt; 0.1mm) Between Pad U3-16(17.375mm,66.6mm) on Multi-Layer And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [0.062mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1672.84mil|Location2.X=1678.026mil|Location1.Y=3670.635mil|Location2.Y=3675.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1672.84mil|Location2.X=1678.026mil|Location1.Y=3670.635mil|Location2.Y=3675.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.062mm &lt; 0.1mm) Between Pad U3-17(17.375mm,67.9mm) on Multi-Layer And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [0.062mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3005.28mil|Location2.X=3010.468mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3005.28mil|Location2.X=3010.468mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-1(51.25mm,23.063mm) on Top Layer And Pad U5-2(50.75mm,23.063mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2828.115mil|Location2.X=2833.302mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2828.115mil|Location2.X=2833.302mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-10(46.75mm,23.063mm) on Top Layer And Pad U5-11(46.25mm,23.063mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2847.8mil|Location2.X=2852.987mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2847.8mil|Location2.X=2852.987mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-10(46.75mm,23.063mm) on Top Layer And Pad U5-9(47.25mm,23.063mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2808.43mil|Location2.X=2813.617mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2808.43mil|Location2.X=2813.617mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-11(46.25mm,23.063mm) on Top Layer And Pad U5-12(45.75mm,23.063mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1836.974mil|Location2.Y=1842.161mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1836.974mil|Location2.Y=1842.161mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-13(44.262mm,21.575mm) on Top Layer And Pad U5-14(44.262mm,21.075mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1817.289mil|Location2.Y=1822.476mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1817.289mil|Location2.Y=1822.476mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-14(44.262mm,21.075mm) on Top Layer And Pad U5-15(44.262mm,20.575mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1797.603mil|Location2.Y=1802.791mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1797.603mil|Location2.Y=1802.791mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-15(44.262mm,20.575mm) on Top Layer And Pad U5-16(44.262mm,20.075mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1777.918mil|Location2.Y=1783.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1777.918mil|Location2.Y=1783.105mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-16(44.262mm,20.075mm) on Top Layer And Pad U5-17(44.262mm,19.575mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1758.233mil|Location2.Y=1763.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1758.233mil|Location2.Y=1763.42mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-17(44.262mm,19.575mm) on Top Layer And Pad U5-18(44.262mm,19.075mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1738.548mil|Location2.Y=1743.735mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1738.548mil|Location2.Y=1743.735mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-18(44.262mm,19.075mm) on Top Layer And Pad U5-19(44.262mm,18.575mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1718.863mil|Location2.Y=1724.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1718.863mil|Location2.Y=1724.05mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-19(44.262mm,18.575mm) on Top Layer And Pad U5-20(44.262mm,18.075mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2985.595mil|Location2.X=2990.782mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2985.595mil|Location2.X=2990.782mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-2(50.75mm,23.063mm) on Top Layer And Pad U5-3(50.25mm,23.063mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1699.178mil|Location2.Y=1704.365mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1699.178mil|Location2.Y=1704.365mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-20(44.262mm,18.075mm) on Top Layer And Pad U5-21(44.262mm,17.575mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1679.493mil|Location2.Y=1684.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1679.493mil|Location2.Y=1684.68mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-21(44.262mm,17.575mm) on Top Layer And Pad U5-22(44.262mm,17.075mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1659.808mil|Location2.Y=1664.995mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1659.808mil|Location2.Y=1664.995mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-22(44.262mm,17.075mm) on Top Layer And Pad U5-23(44.262mm,16.575mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1640.123mil|Location2.Y=1645.31mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2703.54mil|Location2.X=2708.727mil|Location1.Y=1640.123mil|Location2.Y=1645.31mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-23(44.262mm,16.575mm) on Top Layer And Pad U5-24(44.262mm,16.075mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2808.43mil|Location2.X=2813.617mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2808.43mil|Location2.X=2813.617mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-25(45.75mm,14.587mm) on Top Layer And Pad U5-26(46.25mm,14.587mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2828.115mil|Location2.X=2833.302mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2828.115mil|Location2.X=2833.302mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-26(46.25mm,14.587mm) on Top Layer And Pad U5-27(46.75mm,14.587mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2867.485mil|Location2.X=2872.672mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2867.485mil|Location2.X=2872.672mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-28(47.25mm,14.587mm) on Top Layer And Pad U5-29(47.75mm,14.587mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2887.17mil|Location2.X=2892.357mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2887.17mil|Location2.X=2892.357mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-29(47.75mm,14.587mm) on Top Layer And Pad U5-30(48.25mm,14.587mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2965.91mil|Location2.X=2971.097mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2965.91mil|Location2.X=2971.097mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-3(50.25mm,23.063mm) on Top Layer And Pad U5-4(49.75mm,23.063mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2906.855mil|Location2.X=2912.042mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2906.855mil|Location2.X=2912.042mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-30(48.25mm,14.587mm) on Top Layer And Pad U5-31(48.75mm,14.587mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2926.54mil|Location2.X=2931.727mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2926.54mil|Location2.X=2931.727mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-31(48.75mm,14.587mm) on Top Layer And Pad U5-32(49.25mm,14.587mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2946.225mil|Location2.X=2951.412mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2946.225mil|Location2.X=2951.412mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-32(49.25mm,14.587mm) on Top Layer And Pad U5-33(49.75mm,14.587mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2965.91mil|Location2.X=2971.097mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2965.91mil|Location2.X=2971.097mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-33(49.75mm,14.587mm) on Top Layer And Pad U5-34(50.25mm,14.587mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2985.595mil|Location2.X=2990.782mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2985.595mil|Location2.X=2990.782mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-34(50.25mm,14.587mm) on Top Layer And Pad U5-35(50.75mm,14.587mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3005.28mil|Location2.X=3010.468mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3005.28mil|Location2.X=3010.468mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-35(50.75mm,14.587mm) on Top Layer And Pad U5-36(51.25mm,14.587mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1640.123mil|Location2.Y=1645.31mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1640.123mil|Location2.Y=1645.31mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-37(52.738mm,16.075mm) on Top Layer And Pad U5-38(52.738mm,16.575mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1659.808mil|Location2.Y=1664.995mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1659.808mil|Location2.Y=1664.995mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-38(52.738mm,16.575mm) on Top Layer And Pad U5-39(52.738mm,17.075mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1679.493mil|Location2.Y=1684.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1679.493mil|Location2.Y=1684.68mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-39(52.738mm,17.075mm) on Top Layer And Pad U5-40(52.738mm,17.575mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2946.225mil|Location2.X=2951.412mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2946.225mil|Location2.X=2951.412mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-4(49.75mm,23.063mm) on Top Layer And Pad U5-5(49.25mm,23.063mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1699.178mil|Location2.Y=1704.365mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1699.178mil|Location2.Y=1704.365mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-40(52.738mm,17.575mm) on Top Layer And Pad U5-41(52.738mm,18.075mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1718.863mil|Location2.Y=1724.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1718.863mil|Location2.Y=1724.05mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-41(52.738mm,18.075mm) on Top Layer And Pad U5-42(52.738mm,18.575mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1738.548mil|Location2.Y=1743.735mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1738.548mil|Location2.Y=1743.735mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-42(52.738mm,18.575mm) on Top Layer And Pad U5-43(52.738mm,19.075mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1758.233mil|Location2.Y=1763.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1758.233mil|Location2.Y=1763.42mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-43(52.738mm,19.075mm) on Top Layer And Pad U5-44(52.738mm,19.575mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1777.918mil|Location2.Y=1783.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1777.918mil|Location2.Y=1783.105mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-44(52.738mm,19.575mm) on Top Layer And Pad U5-45(52.738mm,20.075mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1797.603mil|Location2.Y=1802.791mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1797.603mil|Location2.Y=1802.791mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-45(52.738mm,20.075mm) on Top Layer And Pad U5-46(52.738mm,20.575mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1817.289mil|Location2.Y=1822.476mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1817.289mil|Location2.Y=1822.476mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-46(52.738mm,20.575mm) on Top Layer And Pad U5-47(52.738mm,21.075mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1836.974mil|Location2.Y=1842.161mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3037.241mil|Location2.X=3042.428mil|Location1.Y=1836.974mil|Location2.Y=1842.161mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-47(52.738mm,21.075mm) on Top Layer And Pad U5-48(52.738mm,21.575mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2926.54mil|Location2.X=2931.727mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2926.54mil|Location2.X=2931.727mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-5(49.25mm,23.063mm) on Top Layer And Pad U5-6(48.75mm,23.063mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2906.855mil|Location2.X=2912.042mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2906.855mil|Location2.X=2912.042mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-6(48.75mm,23.063mm) on Top Layer And Pad U5-7(48.25mm,23.063mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2887.17mil|Location2.X=2892.357mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2887.17mil|Location2.X=2892.357mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-7(48.25mm,23.063mm) on Top Layer And Pad U5-8(47.75mm,23.063mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2867.485mil|Location2.X=2872.672mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2867.485mil|Location2.X=2872.672mil|Location1.Y=1941.863mil|Location2.Y=1947.05mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-8(47.75mm,23.063mm) on Top Layer And Pad U5-9(47.25mm,23.063mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDQZLLGLIVR5SEE43WS3AQOUPS3E2W2Q1XXTLHVCOMMPJMAB4DH5FH"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.1mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1230.093mil|Location2.X=1235.281mil|Location1.Y=2567.084mil|Location2.Y=2572.271mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1230.093mil|Location2.X=1235.281mil|Location1.Y=2567.084mil|Location2.Y=2572.271mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.069mm &lt; 0.1mm) Between Pad J2-1(4.775mm,39.87mm) on Multi-Layer And Track (6.045mm,37.422mm)(6.045mm,45.822mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.069mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1230.093mil|Location2.X=1235.281mil|Location1.Y=2705.084mil|Location2.Y=2710.271mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1230.093mil|Location2.X=1235.281mil|Location1.Y=2705.084mil|Location2.Y=2710.271mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.069mm &lt; 0.1mm) Between Pad J2-2(4.775mm,43.375mm) on Multi-Layer And Track (6.045mm,37.422mm)(6.045mm,45.822mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.069mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1217.298mil|Location2.X=1222.485mil|Location1.Y=3131.265mil|Location2.Y=3136.452mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1217.298mil|Location2.X=1222.485mil|Location1.Y=3131.265mil|Location2.Y=3136.452mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.069mm &lt; 0.1mm) Between Pad J3-1(4.45mm,54.2mm) on Multi-Layer And Track (5.72mm,51.753mm)(5.72mm,60.153mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.069mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1217.298mil|Location2.X=1222.485mil|Location1.Y=3269.265mil|Location2.Y=3274.452mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1217.298mil|Location2.X=1222.485mil|Location1.Y=3269.265mil|Location2.Y=3274.452mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.069mm &lt; 0.1mm) Between Pad J3-2(4.45mm,57.705mm) on Multi-Layer And Track (5.72mm,51.753mm)(5.72mm,60.153mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.069mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1499.375mil|Location2.X=1504.562mil|Location1.Y=3884.798mil|Location2.Y=3889.985mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1499.375mil|Location2.X=1504.562mil|Location1.Y=3884.798mil|Location2.Y=3889.985mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.069mm &lt; 0.1mm) Between Pad J4-1(12.75mm,74.475mm) on Multi-Layer And Track (10.303mm,73.205mm)(18.703mm,73.205mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.069mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1637.375mil|Location2.X=1642.562mil|Location1.Y=3884.798mil|Location2.Y=3889.985mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1637.375mil|Location2.X=1642.562mil|Location1.Y=3884.798mil|Location2.Y=3889.985mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.069mm &lt; 0.1mm) Between Pad J4-2(16.255mm,74.475mm) on Multi-Layer And Track (10.303mm,73.205mm)(18.703mm,73.205mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.069mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4482.44mil|Location2.X=4486.064mil|Location1.Y=3404.684mil|Location2.Y=3408.309mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4482.44mil|Location2.X=4486.064mil|Location1.Y=3404.684mil|Location2.Y=3408.309mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad U7-1(88.9mm,61.675mm) on Top Layer And Track (88.5mm,46.175mm)(88.5mm,63.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5112.361mil|Location2.X=5115.985mil|Location1.Y=2932.243mil|Location2.Y=2935.868mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5112.361mil|Location2.X=5115.985mil|Location1.Y=2932.243mil|Location2.Y=2935.868mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad U7-10(104.2mm,49.675mm) on Top Layer And Track (104.5mm,46.175mm)(104.5mm,63.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5112.361mil|Location2.X=5115.985mil|Location1.Y=3010.983mil|Location2.Y=3014.608mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5112.361mil|Location2.X=5115.985mil|Location1.Y=3010.983mil|Location2.Y=3014.608mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad U7-11(104.2mm,51.675mm) on Top Layer And Track (104.5mm,46.175mm)(104.5mm,63.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5112.361mil|Location2.X=5115.985mil|Location1.Y=3089.723mil|Location2.Y=3093.348mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5112.361mil|Location2.X=5115.985mil|Location1.Y=3089.723mil|Location2.Y=3093.348mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad U7-12(104.2mm,53.675mm) on Top Layer And Track (104.5mm,46.175mm)(104.5mm,63.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5112.361mil|Location2.X=5115.985mil|Location1.Y=3168.463mil|Location2.Y=3172.088mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5112.361mil|Location2.X=5115.985mil|Location1.Y=3168.463mil|Location2.Y=3172.088mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad U7-13(104.2mm,55.675mm) on Top Layer And Track (104.5mm,46.175mm)(104.5mm,63.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5112.361mil|Location2.X=5115.985mil|Location1.Y=3247.204mil|Location2.Y=3250.828mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5112.361mil|Location2.X=5115.985mil|Location1.Y=3247.204mil|Location2.Y=3250.828mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad U7-14(104.2mm,57.675mm) on Top Layer And Track (104.5mm,46.175mm)(104.5mm,63.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5112.361mil|Location2.X=5115.985mil|Location1.Y=3325.944mil|Location2.Y=3329.568mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5112.361mil|Location2.X=5115.985mil|Location1.Y=3325.944mil|Location2.Y=3329.568mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad U7-15(104.2mm,59.675mm) on Top Layer And Track (104.5mm,46.175mm)(104.5mm,63.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5112.361mil|Location2.X=5115.985mil|Location1.Y=3404.684mil|Location2.Y=3408.309mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5112.361mil|Location2.X=5115.985mil|Location1.Y=3404.684mil|Location2.Y=3408.309mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad U7-16(104.2mm,61.675mm) on Top Layer And Track (104.5mm,46.175mm)(104.5mm,63.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4482.44mil|Location2.X=4486.064mil|Location1.Y=3325.944mil|Location2.Y=3329.568mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4482.44mil|Location2.X=4486.064mil|Location1.Y=3325.944mil|Location2.Y=3329.568mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad U7-2(88.8mm,59.675mm) on Top Layer And Track (88.5mm,46.175mm)(88.5mm,63.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4482.44mil|Location2.X=4486.064mil|Location1.Y=3247.204mil|Location2.Y=3250.828mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4482.44mil|Location2.X=4486.064mil|Location1.Y=3247.204mil|Location2.Y=3250.828mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad U7-3(88.8mm,57.675mm) on Top Layer And Track (88.5mm,46.175mm)(88.5mm,63.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4482.44mil|Location2.X=4486.064mil|Location1.Y=3168.463mil|Location2.Y=3172.088mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4482.44mil|Location2.X=4486.064mil|Location1.Y=3168.463mil|Location2.Y=3172.088mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad U7-4(88.8mm,55.675mm) on Top Layer And Track (88.5mm,46.175mm)(88.5mm,63.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4482.44mil|Location2.X=4486.064mil|Location1.Y=3089.723mil|Location2.Y=3093.348mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4482.44mil|Location2.X=4486.064mil|Location1.Y=3089.723mil|Location2.Y=3093.348mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad U7-5(88.8mm,53.675mm) on Top Layer And Track (88.5mm,46.175mm)(88.5mm,63.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4482.44mil|Location2.X=4486.064mil|Location1.Y=3010.983mil|Location2.Y=3014.608mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4482.44mil|Location2.X=4486.064mil|Location1.Y=3010.983mil|Location2.Y=3014.608mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad U7-6(88.8mm,51.675mm) on Top Layer And Track (88.5mm,46.175mm)(88.5mm,63.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4482.44mil|Location2.X=4486.064mil|Location1.Y=2932.243mil|Location2.Y=2935.868mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4482.44mil|Location2.X=4486.064mil|Location1.Y=2932.243mil|Location2.Y=2935.868mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad U7-7(88.8mm,49.675mm) on Top Layer And Track (88.5mm,46.175mm)(88.5mm,63.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4482.44mil|Location2.X=4486.064mil|Location1.Y=2853.503mil|Location2.Y=2857.127mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4482.44mil|Location2.X=4486.064mil|Location1.Y=2853.503mil|Location2.Y=2857.127mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad U7-8(88.8mm,47.675mm) on Top Layer And Track (88.5mm,46.175mm)(88.5mm,63.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5112.361mil|Location2.X=5115.985mil|Location1.Y=2853.503mil|Location2.Y=2857.127mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5112.361mil|Location2.X=5115.985mil|Location1.Y=2853.503mil|Location2.Y=2857.127mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad U7-9(104.2mm,47.675mm) on Top Layer And Track (104.5mm,46.175mm)(104.5mm,63.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDYNU1M3XF0HAHBP1VJOL3DV31YMXI3E13DDIY10FM40TR5PJ3CWJF"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Board Clearance Constraint (Gap=0mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1402.49mil|Location2.X=1408.739mil|Location1.Y=4149.577mil|Location2.Y=4155.826mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1402.49mil|Location2.X=1408.739mil|Location1.Y=4149.577mil|Location2.Y=4155.826mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.2mm) Between Board Edge And Track (10.303mm,73.205mm)(10.303mm,82.349mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1567.844mil|Location2.X=1574.093mil|Location1.Y=4238.962mil|Location2.Y=4245.211mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1567.844mil|Location2.X=1574.093mil|Location1.Y=4238.962mil|Location2.Y=4245.211mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.2mm) Between Board Edge And Track (10.303mm,82.349mm)(18.703mm,82.349mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1653.371mil|Location2.X=1659.621mil|Location1.Y=774.066mil|Location2.Y=780.315mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1653.371mil|Location2.X=1659.621mil|Location1.Y=774.066mil|Location2.Y=780.315mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.2mm) Between Board Edge And Track (16.675mm,-11.25mm)(16.675mm,2.4mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1733.198mil|Location2.X=1739.447mil|Location1.Y=4149.577mil|Location2.Y=4155.826mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1733.198mil|Location2.X=1739.447mil|Location1.Y=4149.577mil|Location2.Y=4155.826mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.2mm) Between Board Edge And Track (18.703mm,73.205mm)(18.703mm,82.349mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=874.867mil|Location2.X=881.117mil|Location1.Y=2635.553mil|Location2.Y=2641.802mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=874.867mil|Location2.X=881.117mil|Location1.Y=2635.553mil|Location2.Y=2641.802mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.2mm) Between Board Edge And Track (-3.099mm,37.422mm)(-3.099mm,45.822mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=935.709mil|Location2.X=941.958mil|Location1.Y=2470.198mil|Location2.Y=2476.448mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=935.709mil|Location2.X=941.958mil|Location1.Y=2470.198mil|Location2.Y=2476.448mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.2mm) Between Board Edge And Track (-3.099mm,37.422mm)(6.045mm,37.422mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=935.709mil|Location2.X=941.958mil|Location1.Y=2800.907mil|Location2.Y=2807.156mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=935.709mil|Location2.X=941.958mil|Location1.Y=2800.907mil|Location2.Y=2807.156mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.2mm) Between Board Edge And Track (-3.099mm,45.822mm)(6.045mm,45.822mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=862.072mil|Location2.X=868.321mil|Location1.Y=3199.734mil|Location2.Y=3205.983mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=862.072mil|Location2.X=868.321mil|Location1.Y=3199.734mil|Location2.Y=3205.983mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.2mm) Between Board Edge And Track (-3.424mm,51.753mm)(-3.424mm,60.153mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=929.311mil|Location2.X=935.561mil|Location1.Y=3034.38mil|Location2.Y=3040.629mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=929.311mil|Location2.X=935.561mil|Location1.Y=3034.38mil|Location2.Y=3040.629mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.2mm) Between Board Edge And Track (-3.424mm,51.753mm)(5.72mm,51.753mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=929.311mil|Location2.X=935.561mil|Location1.Y=3365.088mil|Location2.Y=3371.337mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=929.311mil|Location2.X=935.561mil|Location1.Y=3365.088mil|Location2.Y=3371.337mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.2mm) Between Board Edge And Track (-3.424mm,60.153mm)(5.72mm,60.153mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2472.269mil|Location2.X=2478.518mil|Location1.Y=774.066mil|Location2.Y=780.315mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2472.269mil|Location2.X=2478.518mil|Location1.Y=774.066mil|Location2.Y=780.315mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.2mm) Between Board Edge And Track (37.475mm,-11.25mm)(37.475mm,2.4mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2761.521mil|Location2.X=2767.77mil|Location1.Y=983.583mil|Location2.Y=989.832mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2761.521mil|Location2.X=2767.77mil|Location1.Y=983.583mil|Location2.Y=989.832mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.2mm) Between Board Edge And Track (44.822mm,-0.567mm)(44.822mm,0.83mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2956.521mil|Location2.X=2962.77mil|Location1.Y=974.553mil|Location2.Y=980.802mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2956.521mil|Location2.X=2962.77mil|Location1.Y=974.553mil|Location2.Y=980.802mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.2mm) Between Board Edge And Track (44.822mm,-0.567mm)(54.728mm,-0.567mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3151.521mil|Location2.X=3157.77mil|Location1.Y=983.583mil|Location2.Y=989.832mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3151.521mil|Location2.X=3157.77mil|Location1.Y=983.583mil|Location2.Y=989.832mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.2mm) Between Board Edge And Track (54.728mm,-0.567mm)(54.728mm,0.83mm) on Top Overlay </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDMTUMRPNCP4JIIUV5W3VISKFSDBRRMNFNHI0D3BODTP3E0EXLNMCB"><h2>Waived Violations</h2></a><a name="IDITTXCTM032IQJ2QJQ2LKF0RWYJKQ501KM5BP14HOT40UETKD4OVL"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="waived">Minimum Solder Mask Sliver (Gap=0.1mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2847.8mil|Location2.X=2852.987mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2847.8mil|Location2.X=2852.987mil|Location1.Y=1608.162mil|Location2.Y=1613.35mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.048mm &lt; 0.1mm) Between Pad U5-27(46.75mm,14.587mm) on Top Layer And Pad U5-28(47.25mm,14.587mm) on Top Layer [Top Solder] Mask Sliver [0.048mm]</acronym></a><br>Waived by  at 15.05.2025 12:30:29</td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDMVSCKUSS2TZBLWFNUCYX42G4OC2R2QGQ1PA1V5NUQIYGAZP30AKB"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="waived">Board Clearance Constraint (Gap=0mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2062.82mil|Location2.X=2069.069mil|Location1.Y=553.962mil|Location2.Y=560.211mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\ILKER KESER\Documents\Altium Projects\Motor Driver Project\PCB_Project\PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2062.82mil|Location2.X=2069.069mil|Location1.Y=553.962mil|Location2.Y=560.211mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.2mm) Between Board Edge And Track (16.675mm,-11.25mm)(37.475mm,-11.25mm) on Top Overlay </acronym></a><br>Waived by Top overlay of compenent error  at 15.05.2025 12:27:26</td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

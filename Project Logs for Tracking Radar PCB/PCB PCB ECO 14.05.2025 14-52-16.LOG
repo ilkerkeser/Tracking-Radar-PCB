@@ -1,0 +1,6 @@
+Removed Pin From Net: NetName=BNO_RST Pin=U4-91
+Removed Pin From Net: NetName=BNO_BOOT Pin=U4-92
+Removed Pin From Net: NetName=BNO_INT Pin=U4-93
+Added Pin To Net: NetName=BNO_INT Pin=U4-91
+Added Pin To Net: NetName=BNO_RST Pin=U4-92
+Added Pin To Net: NetName=BNO_BOOT Pin=U4-93

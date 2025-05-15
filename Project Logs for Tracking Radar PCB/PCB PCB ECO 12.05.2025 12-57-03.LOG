@@ -1,0 +1,4 @@
+Removed Pin From Net: NetName=USART2_TX Pin=J9-2
+Removed Pin From Net: NetName=USART2_RX Pin=J9-3
+Added Pin To Net: NetName=USART2_RX Pin=J9-2
+Added Pin To Net: NetName=USART2_TX Pin=J9-3
