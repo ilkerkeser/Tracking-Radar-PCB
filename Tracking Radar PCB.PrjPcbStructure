@@ -1,9 +1,9 @@
-Record=TopLevelDocument|FileName=Block Diagram.SchDoc|SheetNumber=1
-Record=NoMainPathDocument|SourceDocument=Block Diagram.SchDoc|FileName=Debugger.SchDoc|SheetNumber=6
-Record=NoMainPathDocument|SourceDocument=Block Diagram.SchDoc|FileName=GPS_GNSS.SchDoc|SheetNumber=8
-Record=NoMainPathDocument|SourceDocument=Block Diagram.SchDoc|FileName=LoRa_Com.SchDoc|SheetNumber=7
-Record=NoMainPathDocument|SourceDocument=Block Diagram.SchDoc|FileName=Microcontroller.SchDoc|SheetNumber=5
-Record=NoMainPathDocument|SourceDocument=Block Diagram.SchDoc|FileName=Motor_Drivers.SchDoc|SheetNumber=4
-Record=NoMainPathDocument|SourceDocument=Block Diagram.SchDoc|FileName=Power budget.SchDoc|SheetNumber=2
-Record=NoMainPathDocument|SourceDocument=Block Diagram.SchDoc|FileName=Power Management.SchDoc|SheetNumber=3
-Record=NoMainPathDocument|SourceDocument=Block Diagram.SchDoc|FileName=IMU_Sensor.SchDoc|SheetNumber=9
+Record=TopLevelDocument|FileName=Angular_Encoder.SchDoc|SheetNumber=9
+Record=NoMainPathDocument|SourceDocument=Angular_Encoder.SchDoc|FileName=Block Diagram.SchDoc|SheetNumber=1
+Record=NoMainPathDocument|SourceDocument=Angular_Encoder.SchDoc|FileName=Debugger.SchDoc|SheetNumber=6
+Record=NoMainPathDocument|SourceDocument=Angular_Encoder.SchDoc|FileName=GPS_GNSS.SchDoc|SheetNumber=8
+Record=NoMainPathDocument|SourceDocument=Angular_Encoder.SchDoc|FileName=LoRa_Com.SchDoc|SheetNumber=7
+Record=NoMainPathDocument|SourceDocument=Angular_Encoder.SchDoc|FileName=Microcontroller.SchDoc|SheetNumber=5
+Record=NoMainPathDocument|SourceDocument=Angular_Encoder.SchDoc|FileName=Motor_Drivers.SchDoc|SheetNumber=4
+Record=NoMainPathDocument|SourceDocument=Angular_Encoder.SchDoc|FileName=Power budget.SchDoc|SheetNumber=2
+Record=NoMainPathDocument|SourceDocument=Angular_Encoder.SchDoc|FileName=Power Management.SchDoc|SheetNumber=3

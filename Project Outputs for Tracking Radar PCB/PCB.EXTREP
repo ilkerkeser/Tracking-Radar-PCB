@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------------------
-Gerber File Extension Report For: PCB.GBR   15.05.2025  16:10:47
+Gerber File Extension Report For: PCB.GBR   26.05.2025  22:17:44
 ------------------------------------------------------------------------------------------
 
 
@@ -18,7 +18,9 @@ Layer Extension     Layer Description
 .GBO                Bottom Overlay                          
 .GM1                Mechanical 1                            
 .GM2                Top 3D Body                             
+.GM4                Bottom Component Center                 
 .GM8                Mechanical 8                            
+.GM11               Top Component Outline                   
 .GM13               Mechanical 13                           
 .GM15               Mechanical 15                           
 .GKO                Keep-Out Layer                          
