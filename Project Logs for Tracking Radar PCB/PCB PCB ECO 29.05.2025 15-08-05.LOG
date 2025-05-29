@@ -1,0 +1,67 @@
+Removed Pin From Net: NetName=+3V3 Pin=U5-1
+Removed Pin From Net: NetName=NetR9_1 Pin=U5-2
+Removed Pin From Net: NetName=NetR10_1 Pin=U5-3
+Removed Pin From Net: NetName=NetC43_2 Pin=U5-5
+Removed Pin From Net: NetName=NetC44_2 Pin=U5-6
+Removed Pin From Net: NetName=NRST_F103 Pin=U5-7
+Removed Pin From Net: NetName=GND Pin=U5-8
+Removed Pin From Net: NetName=+3V3 Pin=U5-9
+Removed Pin From Net: NetName=NRST Pin=U5-18
+Removed Pin From Net: NetName=GND Pin=U5-20
+Removed Pin From Net: NetName=GND Pin=U5-23
+Removed Pin From Net: NetName=+3V3 Pin=U5-24
+Removed Pin From Net: NetName=NetR11_1 Pin=U5-25
+Removed Pin From Net: NetName=NetR11_2 Pin=U5-27
+Removed Pin From Net: NetName=NetU4_89 Pin=U5-31
+Removed Pin From Net: NetName=USB_D_N Pin=U5-32
+Removed Pin From Net: NetName=USB_D_P Pin=U5-33
+Removed Pin From Net: NetName=STM_JTMS Pin=U5-34
+Removed Pin From Net: NetName=GND Pin=U5-35
+Removed Pin From Net: NetName=+3V3 Pin=U5-36
+Removed Pin From Net: NetName=STM_JTCK Pin=U5-37
+Removed Pin From Net: NetName=JTDI_F103 Pin=U5-38
+Removed Pin From Net: NetName=JTDO_F103 Pin=U5-39
+Removed Pin From Net: NetName=JNTRST_F103 Pin=U5-40
+Removed Pin From Net: NetName=NetR8_2 Pin=U5-44
+Removed Pin From Net: NetName=GND Pin=U5-47
+Removed Pin From Net: NetName=+3V3 Pin=U5-48
+Removed Member From Class: ClassName=Debugger Member=U5
+Added Component: Designator=U?(LQFP48_L)
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer Link"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "www.st.com/stm32"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "http://www.st.com/stonline/products/literature/ds/13587.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "DatasheetVersion"; Value = "rev6, Mar-2008"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageDescription"; Value = "48-Pin Low-Profile Quad Flat Pack, 7 x 7 mm Body, 0.5 mm Pitch (LQFP48)"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "LQFP48"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageVersion"; Value = "Mar-2008"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "30-May-2008"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=+3V3 Pin=U?-1
+Added Pin To Net: NetName=NetR9_1 Pin=U?-2
+Added Pin To Net: NetName=NetR10_1 Pin=U?-3
+Added Pin To Net: NetName=NetC43_2 Pin=U?-5
+Added Pin To Net: NetName=NetC44_2 Pin=U?-6
+Added Pin To Net: NetName=NRST_F103 Pin=U?-7
+Added Pin To Net: NetName=GND Pin=U?-8
+Added Pin To Net: NetName=+3V3 Pin=U?-9
+Added Pin To Net: NetName=NRST Pin=U?-18
+Added Pin To Net: NetName=GND Pin=U?-20
+Added Pin To Net: NetName=GND Pin=U?-23
+Added Pin To Net: NetName=+3V3 Pin=U?-24
+Added Pin To Net: NetName=NetR11_2 Pin=U?-25
+Added Pin To Net: NetName=NetR11_1 Pin=U?-27
+Added Pin To Net: NetName=NetU4_89 Pin=U?-31
+Added Pin To Net: NetName=USB_D_N Pin=U?-32
+Added Pin To Net: NetName=USB_D_P Pin=U?-33
+Added Pin To Net: NetName=STM_JTMS Pin=U?-34
+Added Pin To Net: NetName=GND Pin=U?-35
+Added Pin To Net: NetName=+3V3 Pin=U?-36
+Added Pin To Net: NetName=STM_JTCK Pin=U?-37
+Added Pin To Net: NetName=JTDI_F103 Pin=U?-38
+Added Pin To Net: NetName=JTDO_F103 Pin=U?-39
+Added Pin To Net: NetName=JNTRST_F103 Pin=U?-40
+Added Pin To Net: NetName=NetR8_2 Pin=U?-44
+Added Pin To Net: NetName=GND Pin=U?-47
+Added Pin To Net: NetName=+3V3 Pin=U?-48
+Added Member To Class: ClassName=Debugger Member=Component U? STM32F103C8T6
